@@ -1,122 +1,100 @@
-# Clean My Mac - Công cụ làm sạch máy Mac
+# Clean My Mac
 
-Đây là công cụ giúp dọn dẹp máy Mac bằng cách tìm và xóa các file tạm, cache và file rác khác. Mã nguồn được tổ chức theo mô-đun để dễ dàng mở rộng và thêm các mẫu nhận dạng mới.
+[English](#english) | [Tiếng Việt](#tiếng-việt)
 
-## Cấu trúc thư mục
+## English
 
+A macOS cleaning and optimization tool that helps free up disk space and improve system performance.
+
+### Features
+
+- Cache Cleanup (Completed)
+  - Old Cache (> 30 days)
+  - New Cache (≤ 30 days)
+  - Large Cache (> 10MB)
+  - Small Cache (≤ 10MB)
+- Application Cleanup (In Development)
+- Junk File Cleanup (In Development)
+
+### Usage
+
+1. Grant execution permission to the script:
+```bash
+chmod +x clean_my_mac.sh
 ```
-cleanmymac/
-├── clean_my_mac.sh           # File chính gọi các module
-├── utils.sh                  # Chứa các hàm tiện ích chung
-├── test_utils.sh             # File kiểm thử
-└── patterns/                 # Thư mục chứa các mẫu nhận dạng
-    ├── downloads.sh          # Xử lý thư mục Downloads
-    ├── trash.sh              # Xử lý Thùng rác
-    ├── cache.sh              # Xử lý các file cache
-    ├── logs.sh               # Xử lý các file log
-    ├── temp_files.sh         # Xử lý các file tạm thời
-    ├── apps.sh               # Xử lý các ứng dụng đã tải xuống
-    ├── ds_store.sh           # Xử lý các file .DS_Store
-    ├── dev_tools.sh          # Xử lý các công cụ phát triển
-    ├── docker.sh             # Xử lý Docker
-    └── time_machine.sh       # Xử lý Time Machine
+
+2. Run the program:
+```bash
+./clean_my_mac.sh
 ```
 
-## Cách sử dụng
+### System Requirements
+
+- macOS
+- Terminal
+- Administrator privileges (for some features)
+
+---
+
+## Tiếng Việt
+
+Công cụ dọn dẹp và tối ưu hóa macOS, giúp giải phóng không gian ổ đĩa và cải thiện hiệu suất hệ thống.
+
+### Tính năng
+
+- Dọn dẹp Cache (Hoàn thiện)
+  - Cache Cũ (> 30 ngày)
+  - Cache Mới (≤ 30 ngày)
+  - Cache Lớn (> 10MB)
+  - Cache Nhỏ (≤ 10MB)
+- Dọn dẹp Ứng dụng (Đang phát triển)
+- Dọn dẹp File rác (Đang phát triển)
+
+### Cách sử dụng
 
 1. Cấp quyền thực thi cho script:
-   ```bash
-   chmod +x clean_my_mac.sh
-   ```
-
-2. Chạy script:
-   ```bash
-   ./clean_my_mac.sh
-   ```
-
-3. Chọn các tùy chọn dọn dẹp từ menu:
-   - Dọn dẹp thư mục Downloads
-   - Dọn dẹp Thùng rác
-   - Dọn dẹp file cache
-   - Dọn dẹp file logs
-   - Dọn dẹp file tạm thời
-   - Quản lý ứng dụng
-   - Dọn dẹp file .DS_Store
-   - Dọn dẹp công cụ phát triển (Xcode, npm, yarn)
-   - Dọn dẹp Docker
-   - Dọn dẹp Time Machine
-   - Dọn dẹp tất cả
-
-## Chạy kiểm thử
-
-Để chạy kiểm thử cho các hàm tiện ích:
-
 ```bash
-chmod +x test_utils.sh
-./test_utils.sh
+chmod +x clean_my_mac.sh
 ```
 
-Kiểm thử tập trung vào hàm `confirm_with_details` để đảm bảo nó chỉ chấp nhận đúng ký tự 'y' hoặc 'Y' khi xác nhận xóa file.
+2. Chạy chương trình:
+```bash
+./clean_my_mac.sh
+```
 
-## Cách thêm mẫu nhận dạng mới
+### Yêu cầu hệ thống
 
-1. **Tạo file mới trong thư mục `patterns/`**:
-   ```bash
-   touch patterns/new_pattern.sh
-   ```
+- macOS
+- Terminal
+- Quyền quản trị (một số tính năng)
 
-2. **Viết hàm xử lý mẫu nhận dạng mới**:
-   ```bash
-   #!/bin/bash
+---
 
-   # Mô-đun xử lý mẫu nhận dạng mới
-   # Mô tả về mẫu nhận dạng này
+## Author / Tác giả
 
-   # Mức độ nghiêm trọng
-   SEVERITY_LOW="${GREEN}THẤP${NC}"
-   SEVERITY_MEDIUM="${YELLOW}TRUNG BÌNH${NC}"
-   SEVERITY_HIGH="${RED}CAO${NC}"
+- **Michael Pham**
+- Email: pnbaocuong@gmail.com
 
-   # Hàm chính để dọn dẹp mẫu nhận dạng mới
-   clean_new_pattern() {
-       print_message "Kiểm tra mẫu nhận dạng mới..."
-       
-       # Thêm mã xử lý mẫu nhận dạng mới tại đây
-       # Có thể sử dụng các hàm tiện ích như:
-       # - remove_with_detailed_confirmation
-       # - find_and_remove
-   }
-   ```
+## License / Giấy phép
 
-3. **Thêm import mẫu nhận dạng mới vào file `clean_my_mac.sh`**:
-   ```bash
-   # Import mẫu nhận dạng mới
-   source "$(dirname "$0")/patterns/new_pattern.sh"
-   ```
+MIT License
 
-4. **Thêm tùy chọn mới vào menu chính** trong file `clean_my_mac.sh`:
-   ```bash
-   echo "12. Dọn dẹp mẫu nhận dạng mới"
-   ```
+Copyright (c) 2024 Michael Pham
 
-5. **Thêm xử lý cho tùy chọn mới** trong phần switch-case:
-   ```bash
-   12) clean_new_pattern ;;
-   ```
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-6. **Thêm vào phần "Dọn dẹp tất cả"**:
-   ```bash
-   clean_new_pattern
-   ```
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-## Lưu ý an toàn
-
-- Luôn xem xét kỹ thông tin trước khi xóa bất kỳ file nào.
-- Chỉ xóa khi bạn chắc chắn file không còn cần thiết.
-- Một số tác vụ yêu cầu quyền quản trị (sudo).
-- Script này sẽ yêu cầu xác nhận trước khi xóa bất kỳ file nào.
-- Chỉ nhập 'y' hoặc 'Y' để xác nhận xóa, nhập bất kỳ ký tự nào khác để bỏ qua.
-
-## Đóng góp
-
-Nếu bạn muốn thêm các mẫu nhận dạng mới hoặc cải thiện công cụ, hãy tạo pull request! 
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE. 
